@@ -2,6 +2,7 @@
 title: "Fifth Third Arena Vault Activation (2020)"
 order: 5
 homepage: true
+archived: true
 materials: "Mural, Interior Wall Paint on Glass Pane"
 images:
   - "/projects/images/Mural1.png"

@@ -4,11 +4,13 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 const projects = (await getCollection('projects'))
-  .filter((p) => p.data.homepage !== false && !p.data.archived)
+  .filter((p) => p.data.archived === true)
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title="Works">
+<Layout title="Archive">
+  <h2>Archive</h2>
+  <p>Earlier works.</p>
   <div class="cards">
     {projects.map((project) => (
       <ProjectCard project={project} />

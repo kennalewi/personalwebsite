@@ -2,6 +2,7 @@
 title: "A Moment of Our Time (2020)"
 order: 3
 homepage: true
+archived: true
 materials: "Variable web project, temporarily hosted at amomentofourtime.com"
 image: "/projects/images/TheBenchPrompt.png"
 ---

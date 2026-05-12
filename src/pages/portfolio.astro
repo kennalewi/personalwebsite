@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pages = Array.from({ length: 27 }, (_, i) => `/portfolio/page_${i + 1}.jpg`);
+---
+
+<Layout title="Portfolio">
+  <h2>Portfolio</h2>
+  <div class="portfolio-gallery">
+    {pages.map((src, i) => (
+      <div class="portfolio-page">
+        <img src={src} alt={`Portfolio page ${i + 1}`} loading="lazy" />
+      </div>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .portfolio-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .portfolio-page img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

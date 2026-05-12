@@ -2,6 +2,7 @@
 title: "The Matter (2020)"
 order: 4
 homepage: true
+archived: true
 materials: "Performance through WebEx, Documented as Video"
 image: "/projects/images/TheMatter1.png"
 ---

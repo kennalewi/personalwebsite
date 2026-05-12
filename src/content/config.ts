@@ -7,6 +7,7 @@ const projects = defineCollection({
     order: z.number(),
     materials: z.string(),
     homepage: z.boolean().default(true),
+    archived: z.boolean().default(false),
     // Media: one of image, images (carousel), or video (YouTube embed URL)
     image: z.string().optional(),
     images: z.array(z.string()).optional(),
