@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.homepage !== false)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Works">
+  <div class="cards">
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+</Layout>

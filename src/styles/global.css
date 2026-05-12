@@ -1,0 +1,358 @@
+/* ============================================================
+   Global Styles — Kenna Lewis Portfolio
+   Ported from Jekyll styles.css
+   ============================================================ */
+
+/* Reset */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #fff;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fixed left sidebar */
+.left-column {
+  background-color: #fff;
+  padding: 20px;
+  width: 25%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Scrollable right content */
+.right-column {
+  margin-left: 25%;
+  width: 75%;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+header {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+header h1 a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: inherit;
+}
+
+header h1 a:hover {
+  text-decoration: underline;
+}
+
+/* ── Navigation ─────────────────────────────────────────────── */
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin-bottom: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 300;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Sub-menu (hidden by default) */
+.sub-menu {
+  display: none;
+  margin-left: 20px;
+}
+
+.nav-item.active .sub-menu {
+  display: block;
+}
+
+/* Chevron indicator */
+.nav-item.has-children > a {
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-item.has-children > a::after {
+  content: "»";
+  display: inline-block;
+  margin-left: 5px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.nav-item.has-children.active > a::after {
+  transform: rotate(0.25turn);
+}
+
+/* Suppress arrow animation on first paint */
+.no-animation .nav-item.has-children > a::after {
+  transition: none;
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #444;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1em;
+  font-weight: 500;
+  color: #464646;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1em;
+  font-style: italic;
+  color: #464646;
+}
+
+p {
+  margin: 0 0 20px 0;
+  font-size: 1em;
+  line-height: 1.2;
+  font-weight: 300;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul li,
+ol li {
+  margin-bottom: 0;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.site-footer {
+  border-top: 1px solid #ddd;
+  padding: 20px 0;
+  color: #777;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
+
+.site-footer p {
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+
+.site-footer a {
+  color: #777;
+}
+
+/* ── Homepage Card Grid ─────────────────────────────────────── */
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-content {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-content a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.card-content a:hover {
+  text-decoration: underline;
+}
+
+.card-content .read-more {
+  display: block;
+  margin-top: auto;
+  text-align: right;
+}
+
+.card-images img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 0;
+}
+
+/* ── Project Page ───────────────────────────────────────────── */
+
+.project {
+  margin-bottom: 0;
+}
+
+.project-content p {
+  margin-bottom: 0;
+}
+
+.project-images img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* ── Video Embed ────────────────────────────────────────────── */
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  margin-bottom: 20px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ── Carousel ───────────────────────────────────────────────── */
+
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.carousel-inner {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+
+.carousel-control:hover {
+  text-decoration: none;
+}
+
+.carousel-control.prev {
+  left: 10px;
+}
+
+.carousel-control.next {
+  right: 10px;
+}
+
+/* ── Misc ───────────────────────────────────────────────────── */
+
+blockquote {
+  margin: 0 0 20px;
+  padding: 10px 20px;
+  background: #f7f7f7;
+  border-left: 5px solid #ddd;
+  font-style: italic;
+  color: #555;
+}
+
+code {
+  background: #f4f4f4;
+  padding: 2px 4px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #f4f4f4;
+  padding: 10px;
+  overflow-x: auto;
+}

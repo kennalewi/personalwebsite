@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, materials, image, images, video } = project.data;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const projectUrl = `${base}/projects/${project.slug}/`;
+
+const { Content } = await project.render();
+---
+
+<article class="card">
+  <div class="card-images">
+    {video && (
+      <div class="video-container">
+        <iframe
+          src={video}
+          title={title}
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+    )}
+    {image && <img src={image} alt={title} />}
+    {images && images.length > 0 && <img src={images[0]} alt={title} />}
+  </div>
+  <div class="card-content">
+    <h2>{title}</h2>
+    <h3>{materials}</h3>
+    <div class="card-body">
+      <Content />
+    </div>
+    <div class="read-more">
+      <a href={projectUrl}>More &raquo;</a>
+    </div>
+  </div>
+</article>

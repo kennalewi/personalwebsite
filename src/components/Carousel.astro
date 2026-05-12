@@ -1,0 +1,50 @@
+---
+interface Props {
+  images: string[];
+}
+const { images } = Astro.props;
+---
+
+<div class="carousel">
+  <div class="carousel-inner">
+    {images.map((src, i) => (
+      <div class={`carousel-item${i === 0 ? ' active' : ''}`}>
+        <img src={src} alt="" />
+      </div>
+    ))}
+  </div>
+  <a class="carousel-control prev" href="javascript:void(0)" aria-label="Previous">❮</a>
+  <a class="carousel-control next" href="javascript:void(0)" aria-label="Next">❯</a>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector<HTMLElement>('.carousel');
+    if (!carousel) return;
+
+    const inner = carousel.querySelector<HTMLElement>('.carousel-inner');
+    const items = carousel.querySelectorAll('.carousel-item');
+    const nextBtn = carousel.querySelector<HTMLElement>('.carousel-control.next');
+    const prevBtn = carousel.querySelector<HTMLElement>('.carousel-control.prev');
+
+    if (!inner || items.length === 0 || !nextBtn || !prevBtn) return;
+
+    let currentIndex = 0;
+
+    function update() {
+      inner!.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      update();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      update();
+    });
+
+    update();
+  });
+</script>

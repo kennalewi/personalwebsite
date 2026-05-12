@@ -1,0 +1,78 @@
+---
+import { navigation } from '../data/navigation';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function href(url: string) {
+  // External links pass through unchanged
+  if (url.startsWith('http')) return url;
+  // Root path
+  if (url === '/') return `${base}/`;
+  return `${base}${url}`;
+}
+---
+
+<ul>
+  {navigation.map((item) => (
+    <li class={`nav-item${item.children ? ' has-children' : ''}`}>
+      <a
+        href={href(item.url)}
+        target={item.newTab ? '_blank' : undefined}
+        rel={item.newTab ? 'noopener noreferrer' : undefined}
+      >
+        {item.name}
+      </a>
+      {item.children && (
+        <ul class="sub-menu">
+          {item.children.map((child) => (
+            <li>
+              <a href={href(child.url)}>{child.name}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  ))}
+</ul>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navItemsWithChildren = document.querySelectorAll<HTMLElement>(
+      '.nav-item.has-children > a'
+    );
+
+    // Restore menu state
+    const menuState = localStorage.getItem('menuState');
+    if (menuState === 'open') {
+      navItemsWithChildren.forEach((navLink) => {
+        navLink.parentElement?.classList.add('active');
+        const subMenu = navLink.nextElementSibling as HTMLElement | null;
+        if (subMenu) subMenu.style.display = 'block';
+      });
+    }
+
+    // Toggle on click
+    navItemsWithChildren.forEach((navLink) => {
+      navLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const parent = navLink.parentElement!;
+        const subMenu = navLink.nextElementSibling as HTMLElement | null;
+        const isOpen = subMenu?.style.display === 'block';
+
+        if (isOpen) {
+          if (subMenu) subMenu.style.display = 'none';
+          parent.classList.remove('active');
+          localStorage.setItem('menuState', 'closed');
+        } else {
+          if (subMenu) subMenu.style.display = 'block';
+          parent.classList.add('active');
+          localStorage.setItem('menuState', 'open');
+        }
+      });
+    });
+
+    // Suppress arrow animation on first paint
+    document.body.classList.add('no-animation');
+    setTimeout(() => document.body.classList.remove('no-animation'), 100);
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Carousel from '../../components/Carousel.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+};
+
+const { project } = Astro.props;
+const { title, materials, image, images, video } = project.data;
+const { Content } = await project.render();
+---
+
+<Layout title={title}>
+  <article class="project">
+    <div class="project-images">
+      {video && (
+        <div class="video-container">
+          <iframe
+            src={video}
+            title={title}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      )}
+      {image && <img src={image} alt={title} />}
+      {images && images.length > 0 && <Carousel images={images} />}
+    </div>
+    <div>
+      <h2>{title}</h2>
+      <h3>{materials}</h3>
+      <div class="project-content">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

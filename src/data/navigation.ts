@@ -1,0 +1,34 @@
+export interface NavChild {
+  name: string;
+  url: string;
+}
+
+export interface NavItem {
+  name: string;
+  url: string;
+  newTab?: boolean;
+  children?: NavChild[];
+}
+
+export const navigation: NavItem[] = [
+  {
+    name: 'Works',
+    url: '/',
+    children: [
+      { name: 'Songs from Amazon Alexa (2024)', url: '/projects/alexa/' },
+      { name: 'Cloud Essay (2024)', url: '/projects/thecloudessay/' },
+      { name: 'The Matter (2020)', url: '/projects/thematter/' },
+      { name: 'A Moment of Our Time (2020)', url: '/projects/amomentofourtime/' },
+      { name: 'Fifth Third Arena Vault Activation (2020)', url: '/projects/mural/' },
+    ],
+  },
+  {
+    name: 'About',
+    url: '/about/',
+  },
+  {
+    name: 'CV',
+    url: 'https://docs.google.com/document/d/1Hz3NVwG38V32lhux7nOSHJu5RFVkuvYjTMAudxF0bck/edit?usp=sharing',
+    newTab: true,
+  },
+];
