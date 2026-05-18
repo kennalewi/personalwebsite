@@ -4,6 +4,12 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+// ─── Under Construction Mode ────────────────────────────────
+// Set to true to redirect all site pages to /under-construction/
+// Set to false to make the site live again
+const UNDER_CONSTRUCTION = true;
+// ────────────────────────────────────────────────────────────
+
 interface Props {
   title: string;
 }
@@ -18,6 +24,17 @@ const siteTitle = 'Kenna Lewis';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} — {siteTitle}</title>
+    {UNDER_CONSTRUCTION && (
+      <script>
+        // Redirect unless already unlocked via password
+        if (
+          window.location.pathname !== '/under-construction/' &&
+          localStorage.getItem('site_unlocked') !== 'yes'
+        ) {
+          window.location.replace('/under-construction/');
+        }
+      </script>
+    )}
   </head>
   <body>
     <div class="container">
